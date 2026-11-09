@@ -13,7 +13,7 @@ val keystorePath: String? = System.getenv("SIGNING_KEYSTORE_PATH")
 val keystorePassword: String? = System.getenv("SIGNING_KEYSTORE_PASSWORD")
 val keyAliasName: String? = System.getenv("SIGNING_KEY_ALIAS")
 val keyPasswordValue: String? = System.getenv("SIGNING_KEY_PASSWORD")
-val hasReleaseKey = !keystorePath.isNullOrBlank() && file(keystorePath!!).exists()
+val hasReleaseKey = !keystorePath.isNullOrBlank() && file(keystorePath).exists()
 
 android {
     namespace = "com.melhorn.jellyseerrtv"

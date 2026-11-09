@@ -338,11 +338,11 @@ class MainActivity : Activity() {
 
     private inner class Bridge(private val wv: WebView) {
         @Volatile
-        var textInputActive = false
+        var typing = false
 
         @JavascriptInterface
         fun setTextInputActive(active: Boolean) {
-            textInputActive = active
+            typing = active
             if (!active) handler.post { hideKeyboard(wv) }
         }
 
@@ -419,7 +419,7 @@ class MainActivity : Activity() {
         }
 
         val bridge = bridges[activeWebView()]
-        val typing = bridge?.textInputActive == true
+        val typing = bridge?.typing == true
 
         if (isBackKey(code)) {
             handleBackKey(event)
