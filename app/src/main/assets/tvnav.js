@@ -322,6 +322,13 @@
     // Collapse nested controls: a poster card containing its own link and
     // buttons is a single stop; OK opens it.
     return list.filter(function (c) {
+      // A page region (e.g. <main tabindex="0"> on a short page) is never a
+      // stop when it holds controls of its own; its controls are the stops.
+      if (c.el.tagName === 'MAIN' || c.r.width * c.r.height >= area * 0.25) {
+        for (var j = 0; j < list.length; j++) {
+          if (list[j].el !== c.el && c.el.contains(list[j].el)) return false;
+        }
+      }
       for (var p = c.el.parentElement; p && p !== scope; p = p.parentElement) {
         if (set.has(p)) {
           var pr = p.getBoundingClientRect();

@@ -349,7 +349,7 @@ class MainActivity : Activity() {
         @JavascriptInterface
         fun showKeyboard() {
             handler.postDelayed({
-                wv.requestFocus()
+                if (!wv.isFocused) wv.requestFocus()
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(wv, 0)
             }, 80)
